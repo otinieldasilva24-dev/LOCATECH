@@ -1,31 +1,32 @@
 import { Outlet } from "react-router-dom";
-import img from '@/assets/bg.jpeg'
-import { NavBar } from "./header"; // Certifique-se de que o NavBar tenha o fundo #001140
+import { NavBar } from "./header";
+import { SideBar } from "../app/dashboard/sidebar/Sidebar";
 
+/**
+ * Layout principal do painel de administração.
+ * Estrutura: [Sidebar | Navbar + Conteúdo]
+ */
 export function AppLayoutAdmin() {
   return (
-    <div 
-      className="min-h-screen w-full bg-cover bg-center bg-no-repeat relative flex flex-col antialiased"
-      style={{ backgroundImage: `url(${img})` }}
-    >
-      {/* Overlay azulado idêntico às fotos */}
-      <div className="absolute inset-0 bg-[#001140]/40 backdrop-brightness-90" />
-      
-      {/* Conteúdo Superior (Z-10 para ficar acima do overlay) */}
-      <div className="relative z-10 flex flex-col min-h-screen">
+    <div className="flex h-screen w-full overflow-hidden bg-[#0d1b3e] text-white antialiased">
+
+      {/* ── Sidebar fixa à esquerda ── */}
+      <aside className="hidden md:flex w-[260px] h-full shrink-0 flex-col ">
+        <SideBar />
+      </aside>
+
+      {/* ── Área de conteúdo ── */}
+      <div className="flex flex-col flex-1 h-full min-w-0 overflow-hidden">
+
+        {/* Barra de navegação superior */}
         <NavBar />
-        
-        <main className="flex-1 flex items-center justify-center p-4">
+
+        {/* Página renderizada pelo router */}
+        <main className="flex-1 overflow-y-auto overflow-x-hidden">
           <Outlet />
         </main>
 
-        {/* Footer "Xato" e Fiel */}
-        <footer className="w-full bg-[#001140] py-4 text-center">
-          <p className="text-white text-[11px] md:text-xs font-medium tracking-[0.2em] uppercase">
-            @ 2026 LOCATECH - INFORMAÇÃO CERTA COMBUSTÍVEL E GÁS SEM STRESS
-          </p>
-        </footer>
       </div>
     </div>
-  )
+  );
 }

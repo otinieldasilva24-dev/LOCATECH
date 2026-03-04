@@ -72,6 +72,8 @@ export function SignUpGestor() {
               exit="exit"
               transition={{ duration: 0.3 }}
               className="space-y-5"
+
+     
             >
               <div className="relative">
                 <select className="w-full h-14 px-6 rounded-xl bg-[#D9D9D9] text-slate-800 appearance-none focus:outline-none cursor-pointer">
